@@ -31,7 +31,11 @@ public class MyFrame extends JFrame implements KeyListener{
 			drawing.attack();
 			System.out.println("attack");
 		}
+		else if(e.getKeyCode() == KeyEvent.VK_Z){
+			drawing.ultimate();
+			System.out.println("ultimate"); // new features
 	}
+}
 
 	public void keyReleased(KeyEvent e){
 

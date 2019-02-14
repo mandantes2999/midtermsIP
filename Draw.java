@@ -24,10 +24,18 @@ public class Draw extends JComponent{
 	Monster monster2;
 	Monster monster3; //enemies added
 
+	Bear bear1; //enemies added
+	Bear bear2; //enemies added
+	Bear bear3; //enemies added
+
 	public Draw(){
 		monster1 = new Monster(200, 200);
 		monster2 = new Monster(300, 200);
 		monster3 = new Monster(400, 200); //enemies added
+
+		bear1 = new Bear(200, 300); //enemies added
+		bear2 = new Bear(300, 300); //enemies added
+		bear3 = new Bear(400, 300); //enemies added
 
 		try{
 			image = ImageIO.read(resource);
@@ -98,8 +106,41 @@ public class Draw extends JComponent{
 		thread1.start();
 	}
 
+	public void ultimateAnimation(){
+		Thread thread1 = new Thread(new Runnable(){
+			public void run(){
+				for(int ctr = 0; ctr < 4; ctr++){
+					try {
+						if(ctr==3){
+							resource = getClass().getResource("run0.png");
+						}
+						else{
+							resource = getClass().getResource("ss/ultimate"+ctr+".png");
+						}
+						
+						try{
+							image = ImageIO.read(resource);
+						}
+						catch(IOException e){
+							e.printStackTrace();
+						}
+				        repaint();
+				        Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread1.start();
+	}
+
 	public void attack(){
 		attackAnimation();
+	}
+
+	public void ultimate(){
+		ultimateAnimation();
 	}
 
 	public void moveUp(){
@@ -135,5 +176,9 @@ public class Draw extends JComponent{
 		g.drawImage(monster1.image, monster1.xPos, monster1.yPos, this);
 		g.drawImage(monster2.image, monster2.xPos, monster2.yPos, this);
 		g.drawImage(monster3.image, monster3.xPos, monster3.yPos, this); //enemies added
+
+		g.drawImage(bear1.image, bear1.xPos, bear1.yPos, this); //enemies added
+		g.drawImage(bear2.image, bear2.xPos, bear2.yPos, this); //enemies added
+		g.drawImage(bear3.image, bear3.xPos, bear3.yPos, this); //enemies added
 	}
 }
